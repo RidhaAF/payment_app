@@ -27,12 +27,11 @@ class _MyAppState extends State<MyApp> {
             Center(
               child: Image.asset(
                 'assets/icon_one.png',
-                height: 200,
-                width: 267,
+                height: 150,
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +43,7 @@ class _MyAppState extends State<MyApp> {
                 Text(
                   'Pro',
                   style: titleTextStyle.copyWith(
-                    color: Color(0XFF007DFF),
+                    color: Colors.pink,
                   ),
                 ),
               ],
@@ -58,7 +57,7 @@ class _MyAppState extends State<MyApp> {
               textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
           ],
         ),
@@ -125,17 +124,44 @@ class _MyAppState extends State<MyApp> {
       );
     }
 
+    Widget checkoutButton() {
+      return Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
+        ),
+        height: 50,
+        width: double.infinity,
+        child: TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.pink,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(70),
+            ),
+          ),
+          child: Text(
+            'Checkout Now',
+            style: buttonTextStyle,
+          ),
+        ),
+      );
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: backgroundColor,
-        body: Column(
-          children: [
-            header(),
-            option(0, 'Monthly', 'Good for starting up', '\$20'),
-            option(1, 'Quarterly', 'Focusing on building', '\$55'),
-            option(2, 'Yearly', 'Steady company', '\$220'),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              header(),
+              option(0, 'Monthly', 'Good for starting up', '\$20'),
+              option(1, 'Quarterly', 'Focusing on building', '\$55'),
+              option(2, 'Yearly', 'Steady company', '\$220'),
+              selectedIndex == -1 ? SizedBox() : checkoutButton(),
+            ],
+          ),
         ),
       ),
     );
