@@ -11,6 +11,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  int selectedIndex = -1;
+
   @override
   Widget build(BuildContext context) {
     Widget header() {
@@ -63,9 +65,13 @@ class _MyAppState extends State<MyApp> {
       );
     }
 
-    Widget option() {
+    Widget option(int index) {
       return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
         child: Container(
           padding: EdgeInsets.all(20.0),
           margin: EdgeInsets.symmetric(
@@ -74,7 +80,9 @@ class _MyAppState extends State<MyApp> {
           ),
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.white,
+              color: selectedIndex == index
+                  ? Color(0XFF007DFF)
+                  : Color(0XFF4D5B7C),
             ),
             borderRadius: BorderRadius.circular(14),
           ),
@@ -97,9 +105,9 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             header(),
-            option(),
-            option(),
-            option(),
+            option(0),
+            option(1),
+            option(2),
           ],
         ),
       ),
