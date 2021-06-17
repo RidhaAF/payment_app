@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
       );
     }
 
-    Widget option(int index) {
+    Widget option(int index, String title, String subtitle, String price) {
       return GestureDetector(
         onTap: () {
           setState(() {
@@ -88,9 +88,36 @@ class _MyAppState extends State<MyApp> {
           ),
           child: Row(
             children: [
-              Image.asset(
-                'assets/check.png',
-                width: 18,
+              selectedIndex == index
+                  ? Image.asset(
+                      'assets/check_two.png',
+                      width: 18,
+                    )
+                  : Image.asset(
+                      'assets/check.png',
+                      width: 18,
+                    ),
+              SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: planTextStyle,
+                    ),
+                    Text(
+                      subtitle,
+                      style: optionTextStyle,
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                price,
+                style: priceTextStyle,
               ),
             ],
           ),
@@ -105,9 +132,9 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             header(),
-            option(0),
-            option(1),
-            option(2),
+            option(0, 'Monthly', 'Good for starting up', '\$20'),
+            option(1, 'Quarterly', 'Focusing on building', '\$55'),
+            option(2, 'Yearly', 'Steady company', '\$220'),
           ],
         ),
       ),
